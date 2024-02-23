@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/editTextData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter data"
+        android:layout_margin="16dp"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/editTextSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Matrix size"
+        android:layout_below="@id/editTextData"
+        android:layout_margin="16dp"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/buttonGenerate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextSize"
+        android:layout_centerHorizontal="true"
+        android:text="Generate Matrix"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextData, editTextSize;
+    private Button buttonGenerate;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextData = findViewById(R.id.editTextData);
+        editTextSize = findViewById(R.id.editTextSize);
+        buttonGenerate = findViewById(R.id.buttonGenerate);
+
+        buttonGenerate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                generateMatrix();
+            }
+        });
+    }
+
+    private void generateMatrix() {
+        // اكتب الكود هنا لإنشاء داتا ماتركس GS1 والتحكم في الحجم
+        String data = editTextData.getText().toString();
+        int size = Integer.parseInt(editTextSize.getText().toString());
+
+        // Example: Display a toast with entered data and size
+        Toast.makeText(MainActivity.this, "Data: " + data + ", Size: " + size, Toast.LENGTH_SHORT).show();
+    }
+}
+private void generateMatrix() {
+    String data = editTextData.getText().toString();
+    int size = Integer.parseInt(editTextSize.getText().toString());
+
+    // Create a 2D array to represent the matrix
+    String[][] matrix = new String[size][size];
+
+    // Populate the matrix with the provided data
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            matrix[i][j] = data;
+        }
+    }
+
+    // Display the matrix (for demonstration purposes)
+    StringBuilder matrixString = new StringBuilder();
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            matrixString.append(matrix[i][j]).append(" ");
+        }
+        matrixString.append("\n");
+    }
+
+    // Example: Display the generated matrix in a Toast
+    Toast.makeText(MainActivity.this, "Generated Matrix:\n" + matrixString.toString(), Toast.LENGTH_LONG).show();
+}
